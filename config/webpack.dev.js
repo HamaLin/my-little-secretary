@@ -1,5 +1,6 @@
 const common = require('./webpack.common.js');
 const { merge } = require('webpack-merge');
+const path = require('path');
 
 module.exports = merge(common, {
   mode: 'development',
@@ -11,6 +12,7 @@ module.exports = merge(common, {
     port: 3000,
     historyApiFallback: true,
     liveReload: true,
+    static: { directory: path.join(__dirname, '../static') },
   },
   module: {
     rules: [
@@ -21,6 +23,10 @@ module.exports = merge(common, {
       {
         test: /\.(sa|sc|c)ss$/i,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(gltf|glb)$/,
+        type: 'asset/resource',
       },
     ],
   },
