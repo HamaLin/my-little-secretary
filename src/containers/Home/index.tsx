@@ -1,12 +1,9 @@
-import React, { useRef, useState, Suspense, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Flex, FlexColumn } from '../../components/UI/atoms/layout';
-import Model from './Model';
-import { Canvas, useThree } from '@react-three/fiber';
-import { PerspectiveCamera } from 'three';
 import * as THREE from 'three';
-import { OrbitControls } from '@react-three/drei';
 import Header from './Header';
+import Calendar from '../../components/Calendar';
 
 const Wraper = styled(FlexColumn)`
   height: 100%;
@@ -36,23 +33,27 @@ const Wraper = styled(FlexColumn)`
 const Test = styled.div`
   display: flex;
   flex-direction: column;
-  width: 92%;
-  height: 86%;
-  opacity: 0.87;
+  width: 87%;
+  height: 81%;
+  /* opacity: 0.87; */
   top: 7%;
   position: absolute;
   transform: perspective(600px) rotateY(353deg);
+  overflow: visible;
+
+  /* border-radius: 8px; */
 
   > div {
     width: 100%;
     background-color: white;
-    height: 20%;
+    height: 100%;
   }
 
-  > div + div {
-    margin-top: 5rem;
+  /* > div + div {
+    background-color: transparent;
+    margin-top: 3rem;
     flex-grow: 1;
-  }
+  } */
 `;
 
 const Body = styled(Flex)`
@@ -61,22 +62,13 @@ const Body = styled(Flex)`
 
   > div {
     position: relative;
-    width: 40%;
+    width: 30%;
   }
 
   > div + div {
     flex-grow: 1;
   }
 `;
-
-const CameraHelper = () => {
-  const camera = new PerspectiveCamera(60, 1, 1, 3);
-  return (
-    <group position={[0, 0, 2]}>
-      <cameraHelper args={[camera]} />;
-    </group>
-  );
-};
 
 const Home = () => {
   let camera = new THREE.PerspectiveCamera(40, 1.5, 0.1, 1000);
@@ -132,26 +124,11 @@ const Home = () => {
     <Wraper>
       <Header />
       <Body>
-        <div>
-          <Suspense fallback={<img src="/mikuLoading.gif" />}>
-            <Canvas
-              camera={{
-                position: [0, 0, 7],
-                zoom: 5,
-              }}
-            >
-              {/* <OrbitControls /> */}
-              <ambientLight intensity={0.9} />
-              <Model />
-
-              <CameraHelper />
-            </Canvas>
-          </Suspense>
-        </div>
+        <div></div>
         <div>
           <Test>
-            <div>날씨</div>
-            <div>캘린더</div>
+            {/* <div>날씨</div> */}
+            <Calendar />
           </Test>
         </div>
       </Body>
@@ -160,7 +137,7 @@ const Home = () => {
         style={{
           position: 'absolute',
           width: '20%',
-          height: '10%',
+          height: '8%',
           backgroundColor: 'white',
           opacity: 0.8,
           bottom: 0,
