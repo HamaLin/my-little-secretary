@@ -44,6 +44,9 @@ const AppLayout = ({
       <Suspense fallback={<img src="/mikuLoading.gif" />}>
         <Canvas
           style={{ pointerEvents: 'none' }}
+          onClick={() => {
+            console.log('click');
+          }}
           camera={{
             position: [0, 0, 7],
             zoom: 5,

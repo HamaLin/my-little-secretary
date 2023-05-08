@@ -13,5 +13,5 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false
   },
-  "include": ["src"]
+  "include": ["src", "typescriptConfig/style.d.ts"]
 }

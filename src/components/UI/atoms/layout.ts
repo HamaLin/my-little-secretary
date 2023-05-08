@@ -11,3 +11,7 @@ export const FlexColumn = styled(Flex)`
 export const FlexAlignCenter = styled(Flex)`
   align-items: center;
 `;
+
+export const FlexAllCenter = styled(FlexAlignCenter)`
+  justify-content: center;
+`;
