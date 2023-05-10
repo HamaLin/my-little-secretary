@@ -33,12 +33,12 @@ const Wraper = styled(FlexColumn)`
 const Test = styled.div`
   display: flex;
   flex-direction: column;
-  width: 87%;
-  height: 81%;
+  width: 95%;
+  height: 90%;
   /* opacity: 0.87; */
-  top: 7%;
+  top: 4%;
   position: absolute;
-  transform: perspective(600px) rotateY(353deg);
+  transform: perspective(600px) rotateY(357deg);
   overflow: visible;
 
   /* border-radius: 8px; */

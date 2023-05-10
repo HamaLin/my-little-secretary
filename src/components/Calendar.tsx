@@ -10,7 +10,7 @@ const Wraper = styled(FlexColumn)`
   overflow: visible;
 
   > div {
-    height: 4rem;
+    height: 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,22 +43,33 @@ const ContentBody = styled(Flex)`
   overflow: visible;
 `;
 
+const BlockWraper = styled.div<{
+  heightExtend: boolean;
+}>`
+  width: 14%;
+  height: ${(props) => (props.heightExtend ? '16.6%' : '20%')};
+  padding: 5px;
+  box-sizing: border-box;
+  margin-left: auto;
+`;
+
 const Block = styled(Paper)<{
   boxColor: string;
 }>`
-  width: 13%;
-  height: auto;
-  margin-left: auto;
-  margin-top: 10px;
-  padding: 7px;
+  width: 100%;
+  height: 100%;
+  /* margin-left: auto;
+  margin-top: 10px; */
+  padding: 5px;
   cursor: pointer;
   transition-duration: 0.5s;
+  border: 1px solid none;
 
   :hover {
     border: 1px solid ${(props) => props.boxColor};
-    transform: scale(2, 2.2);
+    /* transform: scale(2, 2.2); */
     z-index: 2;
-    box-shadow: 1px 1px ${(props) => props.boxColor};
+    box-shadow: 3px 3px ${(props) => props.boxColor};
   }
 `;
 
@@ -180,7 +191,9 @@ const Calendar = () => {
           <HiChevronLeft />
         </IconButton>
         <p style={{ fontWeight: 'bold', fontSize: '2rem' }}>
-          {`${calendar.year} / ${calendar.month + 1}`}
+          {`${calendar.year} / ${
+            calendar.month < 9 ? '0' + (calendar.month + 1) : calendar.month + 1
+          }`}
         </p>
         <IconButton onClick={() => onChangeCalendar(1)}>
           <HiChevronRight />
@@ -203,29 +216,32 @@ const Calendar = () => {
         </ContentHead>
         <ContentBody>
           {calendar?.days.map((data, idx) => (
-            <Block
-              boxColor={CALENDAR_COLORS[calendar.month]}
-              key={`${data.date} + ${idx}`}
-              style={{
-                backgroundColor: data?.isThisMonth ? 'none' : '#d9d9d9',
-              }}
-            >
-              <span
+            <BlockWraper heightExtend={calendar.days.length > 35}>
+              <Block
+                boxColor={CALENDAR_COLORS[calendar.month]}
+                key={`${data.date} + ${idx}`}
                 style={{
-                  backgroundColor: data?.isToday ? 'red' : 'none',
-                  color: data?.isToday
-                    ? 'white'
-                    : data?.isThisMonth
-                    ? 'black'
-                    : 'gray',
-                  width: 'fit-content',
-                  padding: '2px 8px',
-                  borderRadius: '50%',
+                  backgroundColor: data?.isThisMonth ? 'none' : '#d9d9d9',
                 }}
               >
-                {data.date}
-              </span>
-            </Block>
+                <span
+                  style={{
+                    backgroundColor: data?.isToday ? 'red' : 'none',
+                    color: data?.isToday
+                      ? 'white'
+                      : data?.isThisMonth
+                      ? 'black'
+                      : 'gray',
+                    width: 'fit-content',
+                    padding: '2px 8px',
+                    borderRadius: '50%',
+                    marginLeft: 'auto',
+                  }}
+                >
+                  {data.date}
+                </span>
+              </Block>
+            </BlockWraper>
           ))}
         </ContentBody>
       </div>

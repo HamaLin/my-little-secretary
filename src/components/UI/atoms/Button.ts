@@ -17,7 +17,8 @@ export const Button = styled.button<{
   box-sizing: border-box;
 
   :hover {
-    background-color: ${(props) => props.theme.palette.primary.light};
+    background-color: #90caf914;
+    /* background-color: ${(props) => props.theme.palette.primary.light}; */
   }
 `;
 
